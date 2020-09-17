@@ -10,7 +10,7 @@ spring:
     database: 0
     host: localhost
     port: 6379
-    password: wn1YnaLDE8P1127oASN5CnS75o6ENwqFnKjNNue0PBcfpup7YgF2a5iUIMmg
+    password:
     jedis:
       pool:
         max-active: 8
@@ -18,10 +18,6 @@ spring:
         max-idle: 8
         min-idle: 0
     timeout: 0
-  devtools:
-    restart:
-      #热部署生效
-      enabled: true
 logging:
   config: log4j2.xml
 
