@@ -30,46 +30,4 @@ public class Demo2Application {
         SpringApplication.run(Demo2Application.class, args);
     }
 
-    @ExceptionHandler(AuthorizationException.class)
-    @ResponseStatus(HttpStatus.FORBIDDEN)
-    public String handleException(AuthorizationException e, Model model) {
-
-        // you could return a 404 here instead (this is how github handles 403, so the user does NOT know there is a
-        // resource at that location)
-        log.debug("AuthorizationException was thrown", e);
-
-        Map<String, Object> map = new HashMap<>();
-        map.put("status", HttpStatus.FORBIDDEN.value());
-        map.put("message", "No message available");
-        model.addAttribute("errors", map);
-
-        return "error";
-    }
-
-    @Bean
-    public Realm realm() {
-        TextConfigurationRealm realm = new TextConfigurationRealm();
-        realm.setUserDefinitions("joe.coder=password,user\n" +
-                "jill.coder=password,admin");
-
-        realm.setRoleDefinitions("admin=read,write\n" +
-                "user=read");
-        realm.setCachingEnabled(true);
-        return realm;
-    }
-
-    @Bean
-    public ShiroFilterChainDefinition shiroFilterChainDefinition() {
-        DefaultShiroFilterChainDefinition chainDefinition = new DefaultShiroFilterChainDefinition();
-        // need to accept POSTs from the login form
-        chainDefinition.addPathDefinition("/login", "authc");
-        chainDefinition.addPathDefinition("/logout", "logout");
-        return chainDefinition;
-    }
-
-    @ModelAttribute(name = "subject")
-    public Subject subject() {
-        return SecurityUtils.getSubject();
-    }
-
 }

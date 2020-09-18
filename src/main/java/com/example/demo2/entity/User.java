@@ -10,4 +10,5 @@ public class User {
     @TableId(type = IdType.INPUT)
     private Long id;
     private String username;
+    private String password;
 }

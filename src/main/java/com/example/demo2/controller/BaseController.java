@@ -1,4 +1,5 @@
 package com.example.demo2.controller;
+import com.example.demo2.service.LoginService;
 import lombok.extern.slf4j.Slf4j;
 import com.example.demo2.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,4 +15,7 @@ public abstract class BaseController {
 
     @Autowired
     protected UserService userService;
+
+    @Autowired
+    protected LoginService loginService;
 }
