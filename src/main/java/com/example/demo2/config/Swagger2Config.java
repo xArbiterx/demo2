@@ -29,7 +29,7 @@ public class Swagger2Config implements WebMvcConfigurer {
         return new ApiInfoBuilder().title("Demo APIs")
                 .description("Backend APIs for Demo")
                 .license("MIT License").licenseUrl("#")
-                .version("2.2.0").build();
+                .version("0.0.1").build();
     }
 
     private Predicate<RequestHandler> apis() {
