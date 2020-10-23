@@ -9,8 +9,6 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class TestJob implements Job {
 
-
-//    @Scheduled(cron = "0 0/59 * * * ?")
     @Override
     public void execute(JobExecutionContext context) {
         log.info("execute TestTask");

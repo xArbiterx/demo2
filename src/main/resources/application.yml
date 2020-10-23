@@ -18,7 +18,15 @@ spring:
         min-idle: 0
     timeout: 0
     database: 0
+  quartz:
+    job-store-type: memory
+
+  task:
+    execution:
+      pool:
+        max-size: 16
+        queue-capacity: 100
+
 logging:
   config: log4j2.xml
-
 
