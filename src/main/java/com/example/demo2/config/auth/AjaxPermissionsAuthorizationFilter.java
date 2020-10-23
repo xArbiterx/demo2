@@ -1,4 +1,4 @@
-package com.example.demo2.auth;
+package com.example.demo2.config.auth;
 
 import com.google.gson.JsonObject;
 import lombok.extern.slf4j.Slf4j;

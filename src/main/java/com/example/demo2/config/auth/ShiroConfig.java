@@ -1,7 +1,5 @@
-package com.example.demo2.config;
+package com.example.demo2.config.auth;
 
-import com.example.demo2.auth.AjaxPermissionsAuthorizationFilter;
-import com.example.demo2.auth.UserRealm;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;

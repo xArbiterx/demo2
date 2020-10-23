@@ -1,4 +1,4 @@
-package com.example.demo2.auth;
+package com.example.demo2.config.auth;
 
 import com.example.demo2.constant.Constants;
 import com.example.demo2.entity.User;
