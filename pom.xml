@@ -80,6 +80,11 @@
             <artifactId>spring-rabbit-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-quartz</artifactId>
+        </dependency>
+
         <!--mybatis普拉斯-->
         <dependency>
             <groupId>com.baomidou</groupId>
@@ -132,11 +137,8 @@
             <artifactId>commons-pool2</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>org.quartz-scheduler</groupId>
-            <artifactId>quartz</artifactId>
-            <version>2.3.0</version>
-        </dependency>
+
+
     </dependencies>
 
     <build>
