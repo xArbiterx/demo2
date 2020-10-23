@@ -3,7 +3,10 @@ package com.example.demo2.config.auth;
 import com.example.demo2.constant.Constants;
 import com.example.demo2.entity.User;
 import com.example.demo2.service.LoginService;
-import com.google.gson.JsonObject;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
@@ -14,8 +17,6 @@ import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Collection;
-
 @Slf4j
 public class UserRealm extends AuthorizingRealm {
 
@@ -25,15 +26,26 @@ public class UserRealm extends AuthorizingRealm {
     @Override
     @SuppressWarnings("unchecked")
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
+        ObjectMapper objectMapper = new ObjectMapper();
+
         Session session = SecurityUtils.getSubject().getSession();
         //查询用户的权限
-        JsonObject permission = (JsonObject) session.getAttribute(Constants.SESSION_USER_PERMISSION);
+        ObjectNode permission = (ObjectNode) session.getAttribute(Constants.SESSION_USER_PERMISSION);
         log.info("permission的值为:" + permission);
         log.info("本用户权限为:" + permission.get("permissionList"));
 
         //为当前用户设置角色和权限
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
-        authorizationInfo.addStringPermissions((Collection<String>) permission.get("permissionList"));
+        try {
+            authorizationInfo.addStringPermissions(
+                    objectMapper.readValue(
+                            permission.get("permissionList").toString(),
+                            new TypeReference<>() {
+                            }
+                    ));
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
         return authorizationInfo;
     }
 

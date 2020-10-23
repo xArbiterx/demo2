@@ -1,6 +1,7 @@
 package com.example.demo2.config.auth;
 
-import com.google.gson.JsonObject;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
@@ -21,8 +22,11 @@ public class AjaxPermissionsAuthorizationFilter extends FormAuthenticationFilter
      */
     @Override
     protected boolean onAccessDenied(ServletRequest request, ServletResponse response) {
+
+        ObjectMapper objectMapper = new ObjectMapper();
         //返回给前端的json
-        JsonObject jsonObject = new JsonObject();
+        ObjectNode objectNode = objectMapper.createObjectNode();
+
         //用来打印返回给前端的json的写入器
         PrintWriter out = null;
         //转http形态获取某些参数
@@ -34,16 +38,16 @@ public class AjaxPermissionsAuthorizationFilter extends FormAuthenticationFilter
             if(req.getAuthType() == null){
                 //没有登陆的
                 res.setStatus(HttpStatus.UNAUTHORIZED.value());
-                jsonObject.addProperty("message", "UNAUTHORIZED");
+                objectNode.put("message", "UNAUTHORIZED");
             } else {
                 //没有权限的
                 res.setStatus(HttpStatus.FORBIDDEN.value());
-                jsonObject.addProperty("message", "FORBIDDEN");
+                objectNode.put("message", "FORBIDDEN");
             }
 
             //从response获得写入器
             out = response.getWriter();
-            out.println(jsonObject);
+            out.println(objectNode);
         } catch (Exception e) {
             //鉴权中出了问题（比如writer没拿到）
             log.error("auth err", e);
