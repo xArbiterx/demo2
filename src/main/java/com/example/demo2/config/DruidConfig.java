@@ -25,8 +25,6 @@ public class DruidConfig {
                 new StatViewServlet(), "/druid/*");
         //白名单
         servletRegistrationBean.addInitParameter("allow", "127.0.0.1");
-        //黑名单
-        servletRegistrationBean.addInitParameter("deny", "*");
         //用户名
         servletRegistrationBean.addInitParameter("loginUsername", "root");
         //密码
@@ -35,30 +33,5 @@ public class DruidConfig {
         servletRegistrationBean.addInitParameter("resetEnable", "false");
         return servletRegistrationBean;
 
-    }
-
-    /**
-     * 监控
-     * @return
-     */
-    @Bean
-    public FilterRegistrationBean filterRegistrationBean(){
-        FilterRegistrationBean filterRegistrationBean=new FilterRegistrationBean();
-        filterRegistrationBean.setFilter(new WebStatFilter());
-        //所有请求进行监控处理
-        filterRegistrationBean.addUrlPatterns("/*");
-        filterRegistrationBean.addInitParameter("exclusions", "*.js,*.gif,*.jpg,*.css,/druid/*");
-        return filterRegistrationBean;
-    }
-
-    /**
-     * 数据源
-     * 需要进行至少一次数据库操作才可显示数据源
-     * @return
-     */
-    @Bean
-    @ConfigurationProperties(prefix = "spring.datasource")
-    public DataSource druidDataSource() {
-        return new DruidDataSource();
     }
 }

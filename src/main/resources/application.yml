@@ -17,7 +17,28 @@ spring:
       #等待连接获取的最大超时时间
       max-wait-millis: 200
     druid:
-      filters: stat,wall,log4j2
+      #状态监控
+      filter:
+        stat:
+          # 慢SQL记录
+          log-slow-sql: true
+          slow-sql-millis: 1000
+          merge-sql: true
+          enabled: true
+        wall:
+          config:
+            multi-statement-allow: true
+      # 监控过滤器
+      web-stat-filter:
+        enabled: true
+        exclusions:
+          - "*.js"
+          - "*.gif"
+          - "*.jpg"
+          - "*.png"
+          - "*.css"
+          - "*.ico"
+          - "/monitor/druid/*"
   redis:
     host: localhost
     port: 6379
