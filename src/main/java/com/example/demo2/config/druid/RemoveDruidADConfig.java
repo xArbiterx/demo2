@@ -1,4 +1,4 @@
-package com.example.demo2.config;
+package com.example.demo2.config.druid;
 
 import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure;
 import com.alibaba.druid.spring.boot.autoconfigure.properties.DruidStatProperties;
