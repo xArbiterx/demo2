@@ -5,9 +5,9 @@ import java.util.List;
 
 /**
  * 假分页
- * @param <T>
+ * @param <typename>
  */
-public class Paging<T> {
+public class Paging<typename> {
     /**
      * 当前页
      */
@@ -19,7 +19,7 @@ public class Paging<T> {
     /**
      * 所有页数据
      */
-    private final List<List<T>> pageData;
+    private final List<List<typename>> pageData;
 
     /**
      *
@@ -27,12 +27,12 @@ public class Paging<T> {
      * @param pageSize 页大小
      * @param dataList 所有数据
      */
-    public Paging (int currentPage, int pageSize, List<T> dataList){
+    public Paging (int currentPage, int pageSize, List<typename> dataList){
         this.currentPage = currentPage;
         pageData = new ArrayList<>();
-        List<T> tmpList = new ArrayList<>();
+        List<typename> tmpList = new ArrayList<>();
         int index = 0;
-        for(T data : dataList){
+        for(typename data : dataList){
 
             if(index >= pageSize){
                 pageData.add(tmpList);
@@ -63,7 +63,7 @@ public class Paging<T> {
      * 获取当前页数据
      * @return 当前页数据
      */
-    public List<T> getCurrentPageDataList() {
+    public List<typename> getCurrentPageDataList() {
         if(currentPage > pageCount)
         {
             throw new NullPointerException("页面超过页总数");
@@ -80,7 +80,7 @@ public class Paging<T> {
      * @param page 选定页
      * @return 选定页数据
      */
-    public List<T> getPageDataList(int page){
+    public List<typename> getPageDataList(int page){
         if (pageData.size() == 0){
             return new ArrayList<>();
         }
