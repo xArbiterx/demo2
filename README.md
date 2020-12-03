@@ -1,11 +1,11 @@
 # Testing Demo
 ## Powered by
 - Spring boot 2
-- MyBatis-Plus
+- Spring Data JPA
 - Shiro
 - Swagger2
 
 ## Testing things
-- basic curd <strong>passed</strong>
-- basic auth
+- basic curd
+- basic auth with redis
 - basic swagger2 usage
