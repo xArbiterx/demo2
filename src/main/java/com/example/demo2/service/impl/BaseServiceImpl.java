@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 /**
  * 服务实现基类
  */
-public class BaseServiceImpl {
+public abstract class BaseServiceImpl {
     @Autowired
     protected UserRepository userRepository;
 }
