@@ -1,8 +1,6 @@
 package com.example.demo2;
 
-import com.example.demo2.entity.User;
 import com.example.demo2.repository.UserRepository;
-import com.example.demo2.util.SnowflakeIdGenerator;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,14 +21,7 @@ class Demo2ApplicationTests {
     @Test
     public void testSelect() {
         log.info(("----- testSelect method ------"));
+        userRepository.updatePasswordById(1111L, "1");
 
-        User user = User.builder()
-                .id(SnowflakeIdGenerator.get().nextId())
-                .username("username")
-                .password("1")
-                .build();
-        userRepository.save(user);
-
-        System.out.println(user.toString());
     }
 }
